@@ -18,67 +18,66 @@ Enemy.prototype.update = function (dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 83, this.y * 101);
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function () {
-    this.sprite = 'images/char-boy';
-
+var Player = function (x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/char-boy.png';
     this.moveDirection = "";
 };
 Player.prototype.update = function (dt) {
     // always reset move direction on update
-    switch(this.movedirection){
+    console.log(this.x + ", " + this.y);
+    switch (this.moveDirection) {
         case "left":
+            if(this.x){
+                this.x--;
+            }
             break;
         case "up":
+            if(this.y){
+                this.y--;
+            }
             break;
         case "right":
+            if(this.x < 4){
+                this.x++;
+            }
             break;
         case "down":
+            if(this.y < 5){
+                this.y++;
+            }
             break;
     }
     this.moveDirection = "";
 };
-Player.prototype.handleInput = function (inputKey) {
+Player.prototype.handleInput = function (inputDirection) {
     //records input to player directional movement
-    switch (inputKey) {
-        case 37:
-            this.moveDirection = "left";
-            break;
-        case 38:
-            this.moveDirection = "up";
-            break;
-        case 39:
-            this.moveDirection = "right";
-            break;
-        case 40:
-            this.moveDirection = "down";
-            break;
-    }
+    this.moveDirection = inputDirection;
 };
 Player.prototype.render = function () {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83 - 41);
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
-
+player = new Player(2, 5);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function (e) {
+document.addEventListener('keydown', function (e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
