@@ -90,10 +90,9 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        //COMMENTED OUT FOR NOW
-//        allEnemies.forEach(function(enemy) {
-//            enemy.update(dt);
-//        });
+        allEnemies.forEach(function(enemy) {
+            enemy.update(dt);
+        });
         player.update();
     }
 
@@ -151,9 +150,9 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
         //COMMENTED OUT FOR NOW
-        //allEnemies.forEach(function(enemy) {
-        //    enemy.render();
-        //});
+        allEnemies.forEach(function(enemy) {
+            enemy.render();
+        });
 
         player.render();
     }
@@ -163,7 +162,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        // not implemented
     }
 
     /* Go ahead and load all of the images we know we're going to need to
