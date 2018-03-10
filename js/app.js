@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function () {
+var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // The image/sprite for our enemies, this uses
@@ -10,7 +10,7 @@ var Enemy = function () {
 };
 
 // Sets enemy speed and position
-Enemy.prototype.init = function () {
+Enemy.prototype.init = function() {
     this.y = Math.round(Math.random() * 2) + 1;
     this.x = Math.random() * 5 - 1;
     this.speed = Math.random() * .06 + .04;
@@ -18,14 +18,14 @@ Enemy.prototype.init = function () {
 
 // Resets enemy row position, speed, and moves them off the left side
 // Of screen so they can re-enter.
-Enemy.prototype.reset = function () {
+Enemy.prototype.reset = function() {
     this.init();
     this.x = -1;
 }
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function (dt) {
+Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -36,7 +36,7 @@ Enemy.prototype.update = function (dt) {
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function () {
+Enemy.prototype.render = function() {
     // X and Y are in reference to the game grid. They are multiplied by pixel width of the screen
     // subtraction from Y is to center the sprite
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83 - 24);
@@ -45,7 +45,7 @@ Enemy.prototype.render = function () {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function (x, y, enemyArray) {
+var Player = function(x, y, enemyArray) {
     //All enemies that could potentially collide with the player
     this.enemyArray = enemyArray;
     //X position on the game grid
@@ -55,7 +55,7 @@ var Player = function (x, y, enemyArray) {
     this.randomiseSprite();
     this.moveDirection = "";
 };
-Player.prototype.update = function (dt) {
+Player.prototype.update = function(dt) {
 
     // Win condition. Reset player if he has reached the top row
     if (this.y === 0) {
@@ -93,7 +93,7 @@ Player.prototype.update = function (dt) {
     // Check to see if the player has run into any enemies
     this.checkCollisions();
 };
-Player.prototype.checkCollisions = function () {
+Player.prototype.checkCollisions = function() {
     // Loop through all enemies
     for (i = 0; i < this.enemyArray.length; i++) {
         //Enemy must be on the same row
@@ -106,7 +106,7 @@ Player.prototype.checkCollisions = function () {
         }
     }
 }
-Player.prototype.randomiseSprite = function () {
+Player.prototype.randomiseSprite = function() {
     //generate a random number num where: 0 <= num < 5
     var randomInt = Math.floor(Math.random() * 4.999999);
     //assign a random sprite to the player based on the random draw.
@@ -128,16 +128,16 @@ Player.prototype.randomiseSprite = function () {
             break;
     }
 }
-Player.prototype.handleInput = function (inputDirection) {
+Player.prototype.handleInput = function(inputDirection) {
     //records input direction to player moveDirection
     this.moveDirection = inputDirection;
 };
-Player.prototype.render = function () {
+Player.prototype.render = function() {
     // X and Y are in reference to the game grid. They are multiplied by pixel width of the screen
     // subtraction from Y is to center the sprite
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83 - 41);
 };
-Player.prototype.reset = function () {
+Player.prototype.reset = function() {
     //Resets the player to starting position and clears his move inputs.
     this.x = 2;
     this.y = 5;
@@ -152,7 +152,7 @@ player = new Player(2, 5, allEnemies);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
